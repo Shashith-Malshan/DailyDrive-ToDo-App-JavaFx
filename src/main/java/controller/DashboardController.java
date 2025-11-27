@@ -1,4 +1,4 @@
 package controller;
 
-public class DashboardController {
+public interface DashboardController {
 }
