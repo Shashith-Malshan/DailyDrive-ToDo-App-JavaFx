@@ -77,14 +77,13 @@ public class DashboardFormController implements Initializable {
     @FXML
     void completedOnAction(ActionEvent event) {
 
-        if(dateToComplete.getValue()==null){
+        if(completedDate.getValue()==null){
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText("Invalid Input");
             alert.setContentText("Please select the completed date.");
             alert.showAndWait();
-
 
         }else{
             Task selected = (Task) tblNewTask.getSelectionModel().getSelectedItem();
