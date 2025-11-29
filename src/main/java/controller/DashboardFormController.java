@@ -11,6 +11,7 @@ import model.dto.Task;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class DashboardFormController implements Initializable {
@@ -98,9 +99,26 @@ public class DashboardFormController implements Initializable {
     @FXML
     void deleteOnAction(ActionEvent event) {
 
-        Task selected= (Task) tblCompleted.getSelectionModel().getSelectedItem();
-        dashboardController.deleteTask(selected);
-        loadCompletedTasks();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Action");
+        alert.setHeaderText("Are you sure?");
+        alert.setContentText("Do you want to delete this task?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            Task selected= (Task) tblCompleted.getSelectionModel().getSelectedItem();
+            dashboardController.deleteTask(selected);
+            loadCompletedTasks();
+        } else {
+
+        }
+
+
+
+
+
+
+
 
     }
 
