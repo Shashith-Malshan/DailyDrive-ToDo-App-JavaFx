@@ -85,6 +85,7 @@ public class DashboardFormController implements Initializable {
     void deleteOnAction(ActionEvent event) {
         Task selected= (Task) tblCompleted.getSelectionModel().getSelectedItem();
         dashboardController.deleteTask(selected);
+        loadCompletedTasks();
 
     }
 

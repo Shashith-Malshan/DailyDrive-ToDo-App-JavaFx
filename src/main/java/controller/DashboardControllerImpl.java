@@ -54,6 +54,16 @@ public class DashboardControllerImpl implements DashboardController {
 
     @Override
     public void deleteTask(Task selected) {
+        try {
+            Connection connection=DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement= connection.prepareStatement("DELETE FROM task WHERE task_id=?");
+            preparedStatement.setObject(1,selected.getTaskId());
+            preparedStatement.execute();
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
