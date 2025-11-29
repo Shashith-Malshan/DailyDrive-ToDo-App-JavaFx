@@ -15,7 +15,7 @@ public class Task {
     private String description;
     private String dateToComplete;
     private String completedDate;
-    private Boolean isCompleted;
+    private boolean isCompleted;
 
 
 }

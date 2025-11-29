@@ -14,8 +14,24 @@ public class DashboardControllerImpl implements DashboardController {
 
     @Override
     public void addTask(Task task) {
+        try {
+            Connection connection=DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement= connection.prepareStatement("INSERT INTO task(task_id,description,dateToComplete) VALUES (?,?,?)");
+            preparedStatement.setObject(1,task.getTaskId());
+            preparedStatement.setObject(2,task.getDescription());
+            preparedStatement.setObject(3,task.getDateToComplete());
+
+            preparedStatement.execute();
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
+
 
     @Override
     public void completeTask(Task selected, String string) {
@@ -81,6 +97,18 @@ public class DashboardControllerImpl implements DashboardController {
 
     @Override
     public String getLastId() {
-        return "";
+        try {
+            Connection connection=DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement= connection.prepareStatement("SELECT task_id FROM task ORDER BY task_id DESC LIMIT 1");
+            ResultSet resultSet= preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("task_id");
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -106,10 +106,19 @@ public class DashboardFormController implements Initializable {
     }
 
     String getLastId(){
+        System.out.println(dashboardController.getLastId());
         return dashboardController.getLastId();
     }
     String generateNextId(String lastId){
-        return null;
+
+        if (lastId == null || lastId.isEmpty()) {
+            return "T001";
+        }
+
+        int number = Integer.parseInt(lastId.substring(1));
+        number++;
+
+        return String.format("T%03d", number);
     }
 
 
