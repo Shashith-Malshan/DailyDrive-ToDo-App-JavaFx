@@ -8,6 +8,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import model.dto.Task;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,10 +46,10 @@ public class DashboardFormController implements Initializable {
     private DatePicker dateToComplete;
 
     @FXML
-    private TableView<?> tblCompleted;
+    private TableView<Task> tblCompleted;
 
     @FXML
-    private TableView<?> tblNewTask;
+    private TableView<Task> tblNewTask;
 
     @FXML
     private TextField txtEnterTask;
@@ -55,23 +57,58 @@ public class DashboardFormController implements Initializable {
     @FXML
     void addTaskOnAction(ActionEvent event) {
 
+        Task task=new Task(generateNextId(getLastId()), txtEnterTask.getText(), dateToComplete.getValue().toString(), null, false);
+
+        dashboardController.addTask(task);
+
 
     }
 
     @FXML
     void completedOnAction(ActionEvent event) {
+        Task selected = (Task) tblNewTask.getSelectionModel().getSelectedItem();
+        dashboardController.completeTask(selected,completedDate.getValue().toString());
 
     }
 
     @FXML
     void deleteOnAction(ActionEvent event) {
+        Task selected= (Task) tblCompleted.getSelectionModel().getSelectedItem();
+        dashboardController.deleteTask(selected);
 
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        colNewTask.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colDateToComplete.setCellValueFactory(new PropertyValueFactory<>("dateToComplete"));
+
+        colCompetedTask.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colCompletedDate.setCellValueFactory(new PropertyValueFactory<>("completedDate"));
+
 
 
     }
+
+    void loadNewTasks(){
+
+        tblNewTask.setItems(dashboardController.getNewTasks());
+
+
+    }
+
+    void loadCompletedTasks(){
+        tblCompleted.setItems(dashboardController.getCompletedTasks());
+
+    }
+
+    String getLastId(){
+        return dashboardController.getLastId();
+    }
+    String generateNextId(String lastId){
+        return null;
+    }
+
+
 }
