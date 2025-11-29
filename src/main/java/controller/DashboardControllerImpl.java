@@ -35,7 +35,20 @@ public class DashboardControllerImpl implements DashboardController {
 
 
     @Override
-    public void completeTask(Task selected, String string) {
+    public void completeTask(Task task,String completedDate) {
+        try {
+            Connection connection=DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement= connection.prepareStatement("UPDATE task SET completedDate=?,isCompleted=? WHERE task_id=?");
+            preparedStatement.setObject(1,completedDate);
+            preparedStatement.setBoolean(2,true);
+            preparedStatement.setObject(3,task.getTaskId());
+
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

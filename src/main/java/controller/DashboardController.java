@@ -6,7 +6,7 @@ import model.dto.Task;
 public interface DashboardController {
     void addTask(Task task);
 
-    void completeTask(Task selected, String string);
+    void completeTask(Task task,String string);
 
     void deleteTask(Task selected);
 

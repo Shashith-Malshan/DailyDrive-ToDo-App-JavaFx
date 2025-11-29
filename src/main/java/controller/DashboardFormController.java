@@ -72,8 +72,12 @@ public class DashboardFormController implements Initializable {
 
     @FXML
     void completedOnAction(ActionEvent event) {
-        Task selected = (Task) tblNewTask.getSelectionModel().getSelectedItem();
-        dashboardController.completeTask(selected,completedDate.getValue().toString());
+       Task selected = (Task) tblNewTask.getSelectionModel().getSelectedItem();
+       dashboardController.completeTask(selected,completedDate.getValue().toString());
+
+        loadNewTasks();
+        loadCompletedTasks();
+        completedDate.setValue(null);
 
     }
 
