@@ -2,14 +2,22 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class DashboardFormController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class DashboardFormController implements Initializable {
+
+    DashboardController dashboardController=new DashboardControllerImpl();
+
+    @FXML
+    private DatePicker completedDate;
 
     @FXML
     private Button btnAddTask;
@@ -18,34 +26,35 @@ public class DashboardFormController {
     private Button btnCompleted;
 
     @FXML
-    private Button btnDeleted;
+    private Button btnDelete;
 
     @FXML
-    private CheckBox cardToDoTask;
+    private TableColumn<?, ?> colCompetedTask;
 
     @FXML
-    private TableColumn<?, ?> colDate;
+    private TableColumn<?, ?> colCompletedDate;
 
     @FXML
-    private TableColumn<?, ?> colId;
+    private TableColumn<?, ?> colDateToComplete;
 
     @FXML
-    private TableColumn<?, ?> colTask;
+    private TableColumn<?, ?> colNewTask;
 
     @FXML
-    private DatePicker datetoComplete;
+    private DatePicker dateToComplete;
 
     @FXML
     private TableView<?> tblCompleted;
 
     @FXML
+    private TableView<?> tblNewTask;
+
+    @FXML
     private TextField txtEnterTask;
 
     @FXML
-    private TextField txtId;
-
-    @FXML
     void addTaskOnAction(ActionEvent event) {
+
 
     }
 
@@ -59,4 +68,10 @@ public class DashboardFormController {
 
     }
 
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+    }
 }
