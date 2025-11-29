@@ -55,7 +55,28 @@ public class DashboardControllerImpl implements DashboardController {
 
     @Override
     public ObservableList<Task> getCompletedTasks() {
-        return null;
+        ObservableList<Task> tasks= FXCollections.observableArrayList();
+        try {
+            Connection connection= DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement= connection.prepareStatement("SELECT * FROM task WHERE isCompleted=TRUE");
+            ResultSet resultSet= preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                tasks.add(new Task(
+                        resultSet.getString("task_id"),
+                        resultSet.getString("description"),
+                        resultSet.getString("dateToComplete"),
+                        resultSet.getString("completedDate"),
+                        resultSet.getBoolean("isCompleted")
+                ));
+
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return tasks;
     }
 
     @Override
