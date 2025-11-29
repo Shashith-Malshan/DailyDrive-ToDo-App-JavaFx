@@ -5,11 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.dto.Task;
 
@@ -60,29 +56,48 @@ public class DashboardFormController implements Initializable {
     @FXML
     void addTaskOnAction(ActionEvent event) {
 
-        Task task=new Task(generateNextId(getLastId()), txtEnterTask.getText(), dateToComplete.getValue().toString(), null, false);
+        if(dateToComplete.getValue()==null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Invalid Input");
+            alert.setContentText("Please fill all fields.");
+            alert.showAndWait();
 
-        dashboardController.addTask(task);
-        txtEnterTask.clear();
-        dateToComplete.setValue(null);
-        loadNewTasks();
+        }else {
+            Task task=new Task(generateNextId(getLastId()), txtEnterTask.getText(), dateToComplete.getValue().toString(), null, false);
 
-
+            dashboardController.addTask(task);
+            txtEnterTask.clear();
+            dateToComplete.setValue(null);
+            loadNewTasks();
+        }
     }
 
     @FXML
     void completedOnAction(ActionEvent event) {
-       Task selected = (Task) tblNewTask.getSelectionModel().getSelectedItem();
-       dashboardController.completeTask(selected,completedDate.getValue().toString());
 
-        loadNewTasks();
-        loadCompletedTasks();
-        completedDate.setValue(null);
+        if(dateToComplete.getValue()==null){
 
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Invalid Input");
+            alert.setContentText("Please select the completed date.");
+            alert.showAndWait();
+
+
+        }else{
+            Task selected = (Task) tblNewTask.getSelectionModel().getSelectedItem();
+            dashboardController.completeTask(selected,completedDate.getValue().toString());
+
+            loadNewTasks();
+            loadCompletedTasks();
+            completedDate.setValue(null);
+        }
     }
 
     @FXML
     void deleteOnAction(ActionEvent event) {
+
         Task selected= (Task) tblCompleted.getSelectionModel().getSelectedItem();
         dashboardController.deleteTask(selected);
         loadCompletedTasks();
