@@ -115,7 +115,7 @@
                   </DropShadow>
                </effect>
             </DatePicker>
-            <TableView fx:id="tblNewTask" layoutX="23.0" layoutY="149.0" prefHeight="285.0" prefWidth="305.0" style="-fx-background-color: #fafcfd; -fx-background-radius: 20; -fx-border-radius: 20;">
+            <TableView fx:id="tblNewTask" layoutX="23.0" layoutY="149.0" prefHeight="285.0" prefWidth="308.0" style="-fx-background-color: #fafcfd; -fx-background-radius: 20; -fx-border-radius: 20;">
                <columns>
                   <TableColumn fx:id="colNewTask" prefWidth="208.800048828125" style="-fx-background-radius: 20; -fx-background-color: #c5abfb; -fx-border-radius: 20;" text="Task" />
                   <TableColumn fx:id="colDateToComplete" prefWidth="95.199951171875" style="-fx-background-radius: 20; -fx-background-color: #c5abfb; -fx-border-radius: 20;" text="Date" />

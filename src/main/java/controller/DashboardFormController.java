@@ -87,6 +87,8 @@ public class DashboardFormController implements Initializable {
         colCompetedTask.setCellValueFactory(new PropertyValueFactory<>("description"));
         colCompletedDate.setCellValueFactory(new PropertyValueFactory<>("completedDate"));
 
+        loadNewTasks();
+
 
 
     }
