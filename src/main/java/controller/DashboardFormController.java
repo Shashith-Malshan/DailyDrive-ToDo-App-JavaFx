@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.dto.Task;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class DashboardFormController implements Initializable {
@@ -60,6 +63,9 @@ public class DashboardFormController implements Initializable {
         Task task=new Task(generateNextId(getLastId()), txtEnterTask.getText(), dateToComplete.getValue().toString(), null, false);
 
         dashboardController.addTask(task);
+        txtEnterTask.clear();
+        dateToComplete.setValue(null);
+        loadNewTasks();
 
 
     }
@@ -93,6 +99,7 @@ public class DashboardFormController implements Initializable {
 
     }
 
+    @FXML
     void loadNewTasks(){
 
         tblNewTask.setItems(dashboardController.getNewTasks());

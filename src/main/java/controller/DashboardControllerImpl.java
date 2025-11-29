@@ -16,10 +16,11 @@ public class DashboardControllerImpl implements DashboardController {
     public void addTask(Task task) {
         try {
             Connection connection=DBConnection.getInstance().getConnection();
-            PreparedStatement preparedStatement= connection.prepareStatement("INSERT INTO task(task_id,description,dateToComplete) VALUES (?,?,?)");
+            PreparedStatement preparedStatement= connection.prepareStatement("INSERT INTO task(task_id,description,dateToComplete,isCompleted) VALUES (?,?,?,?)");
             preparedStatement.setObject(1,task.getTaskId());
             preparedStatement.setObject(2,task.getDescription());
             preparedStatement.setObject(3,task.getDateToComplete());
+            preparedStatement.setObject(4,false);
 
             preparedStatement.execute();
 
